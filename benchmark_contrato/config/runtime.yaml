@@ -1,0 +1,37 @@
+device: cuda
+batch_size: 1
+precision: fp32
+num_workers: 2
+warmup_runs: 10
+measured_runs: 50
+save_predictions: true
+profile_memory: true
+profile_flops: true
+allow_null_flops: true
+allow_null_parameters: false
+seed: 360
+
+official_reproduction:
+  resize: [320, 640]
+  flow_iterations: 12
+  use_official_metric_formulas: true
+  save_sample_prediction: true
+
+standardized_efficiency:
+  input_height: 320
+  input_width: 640
+  flow_iterations: 12
+  normalize_input: false
+  resize_policy: official_resize
+
+regional_robustness:
+  latitude_bins:
+    - [-90, -60]
+    - [-60, -30]
+    - [-30, 0]
+    - [0, 30]
+    - [30, 60]
+    - [60, 90]
+  polar_threshold_deg: 60
+  compute_distortion_aware_metrics: true
+  use_valid_mask: true

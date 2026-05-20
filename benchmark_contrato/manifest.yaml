@@ -1,0 +1,37 @@
+contract_version: 1.0
+method_name: slof
+method_family: siamese-representation-learning
+paper_title: Learning Omnidirectional Flow via Simple Siamese Representation
+paper_year: 2022
+framework: pytorch
+supports_gpu: true
+project_root_hint: /app
+method_entry_root_hint: /app
+notes: |
+  Adaptacao do SLOF/FLOW360 para o contrato experimental dentro da pasta
+  benchmark_contrato, preservando o codigo original do repositorio.
+  O caminho oficial de inferencia reaproveita a arquitetura e checkpoints
+  publicados no workspace, com avaliacao alinhada ao fluxo de FLOW360.
+
+input_format:
+  image_layout: erp
+  tensor_shape: [B, C, H, W]
+  image_channels: 3
+  image_dtype: float32
+  image_range: [0.0, 1.0]
+
+output_format:
+  flow_layout: erp
+  flow_tensor_shape: [B, 2, H, W]
+  flow_dtype: float32
+
+datasets_supported:
+  - flow360
+
+checkpoints:
+  default: /app/weights/singlerotation.pt
+
+scenarios_supported:
+  - official_reproduction
+  - standardized_efficiency
+  - regional_robustness

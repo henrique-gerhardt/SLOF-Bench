@@ -1,0 +1,20 @@
+scenario: official_reproduction
+dataset: flow360
+scene: default
+checkpoint: /app/weights/singlerotation.pt
+checkpoint_variant: singlerotation
+method_root: /app
+
+official_eval:
+  split: test
+  flow_iterations: 12
+  rotation: false
+
+regional_eval:
+  split: test
+  save_predictions: true
+
+notes: |
+  O checkpoint padrao segue o modelo singlerotation distribuido com o pacote.
+  Para testar outra variante, altere checkpoint/checkpoint_variant aqui ou use
+  a variavel de ambiente SLOF_CHECKPOINT.

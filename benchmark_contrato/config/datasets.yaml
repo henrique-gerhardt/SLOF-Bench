@@ -1,0 +1,16 @@
+default_dataset: flow360
+
+datasets:
+  flow360:
+    root: /datasets/FLOW360_train_test
+    local_reference_root: /Volumes/External SSD/Mestrado/Datasets/FLOW360_train_test
+    split: test
+    frame_dir: frames
+    forward_flow_dir: fflows
+    backward_flow_dir: bflows
+    frame_suffix: .png
+    flow_suffix: .npy
+    notes: |
+      Monte o dataset no container em /datasets/FLOW360_train_test.
+      A estrutura esperada eh a mesma usada pelo codigo original:
+      split/scene/{frames,fflows,bflows}.

@@ -1,0 +1,30 @@
+FROM pytorch/pytorch:1.12.1-cuda11.3-cudnn8-runtime
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    NVIDIA_VISIBLE_DEVICES=all \
+    NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bash \
+    build-essential \
+    ca-certificates \
+    git \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY . /app
+
+RUN pip install --upgrade pip setuptools wheel && \
+    pip install -r /app/benchmark_contrato/requirements-benchmark.txt
+
+RUN chmod +x /app/benchmark_contrato/entrypoint.sh
+
+ENTRYPOINT ["/bin/bash"]
